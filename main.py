@@ -2,7 +2,6 @@ import os
 import logging
 from logging import Formatter, FileHandler
 from flask import Flask, request, jsonify, render_template
-
 from ocr import process_image
 
 app = Flask(__name__)
@@ -20,7 +19,7 @@ def ocr():
         url = request.json['image_url']
         name_image = request.json['name_image']
         output = process_image(url, name_image)
-        return jsonify({"output": output})
+        return jsonify({output})
     except:
         return jsonify(
             {"error": "Did you mean to send: {'image_url': 'some_image_url'}"}
