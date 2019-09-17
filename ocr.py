@@ -10,5 +10,6 @@ def process_image(url, name_image):
 
     # Open image and proccess
     command = "python3 ocr_tests.py --image images/" + new_name
-    data = os.system(command)
+    data = os.popen(command).read()
+
     return data

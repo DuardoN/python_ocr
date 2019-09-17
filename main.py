@@ -3,6 +3,7 @@ import logging
 from logging import Formatter, FileHandler
 from flask import Flask, request, jsonify, render_template
 from ocr import process_image
+import json
 
 app = Flask(__name__)
 _VERSION = 1  # API version
@@ -19,7 +20,7 @@ def ocr():
         url = request.json['image_url']
         name_image = request.json['name_image']
         output = process_image(url, name_image)
-        return jsonify({output})
+        return jsonify(json.loads(output))
     except:
         return jsonify(
             {"error": "Did you mean to send: {'image_url': 'some_image_url'}"}
